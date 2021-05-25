@@ -113,7 +113,7 @@ building, of the runtime environment, from the docker command line.
 
 ### Build Docker Container
 ```bash
-docker build --tag okit --force-rm https://github.com/oracle/oci-designer-toolkit.git
+docker build --tag okit --force-rm --build-arg source=git https://github.com/oracle/oci-designer-toolkit.git
 ```
 
 ### Run Container
@@ -151,6 +151,10 @@ or
 ```bash
 git clone --depth 1 https://github.com/oracle/oci-designer-toolkit.git
 ```
+
+*IMPORTANT*
+Git on windows might adding CL/RF to the end of the file. While cloning using `-c core.autocrlf=input` is recommended.
+If you are getting `no such file or directory` errors after build within Windows, this could be the reason.
 
 #### Update
 If you have previously cloned the GitHub Repository you can update to the latest release by pulling it from the repository 

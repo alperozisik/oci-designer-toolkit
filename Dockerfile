@@ -2,7 +2,18 @@
 # Copyright (c) 2020, 2021, Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-FROM oraclelinux:7-slim
+FROM oraclelinux:7-slim as cloner
+ARG source="local"
+RUN mkdir /oci-designer-toolkit
+ADD . /oci-designer-toolkit/
+RUN echo "getting files from $source"
+RUN if [ "$source" == "git" ]; then \
+ rm -rf /oci-designer-toolkit && \
+ yum install git -y && \
+ git clone https://github.com/oracle/oci-designer-toolkit.git  ; \
+fi
+
+FROM oraclelinux:7-slim as final
 LABEL "provider"="Oracle" \
       "issues"="https://github.com/oracle/oci-designer-toolkit/issues" \
       "version"="0.21.0" \
@@ -21,8 +32,8 @@ ENV PYTHONIOENCODING=utf8 \
 EXPOSE 80
 EXPOSE 443
 # Copy source code
-COPY containers/oci/* /root/.oci/
-COPY containers/docker/run-server.sh /root/bin/
+COPY --from=cloner /oci-designer-toolkit/containers/oci/* /root/.oci/
+COPY --from=cloner /oci-designer-toolkit/containers/docker/run-server.sh /root/bin/
 # Install new yum repos
 RUN yum install -y \
     oracle-softwarecollection-release-el7 \

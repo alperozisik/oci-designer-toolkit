@@ -60,8 +60,9 @@ building, of the runtime environment, from the docker command line.
 Before building / running OKIT you will need to install [Docker / Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 #### Build Docker Container
+Build from github
 ```bash
-docker build --tag okit --force-rm https://github.com/oracle/oci-designer-toolkit.git
+docker build --tag okit --force-rm --build-arg source=git https://github.com/oracle/oci-designer-toolkit.git
 ```
 
 #### Create / Generate Connection Information
