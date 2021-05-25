@@ -45,4 +45,4 @@ if (-not (Test-Path -LiteralPath $OciCliFolder))
 }
 
 
-& "docker" run --rm -it -p 443:443/tcp -p 80:80/tcp --hostname okit --name okit -v $ENV:UserProfile\.oci:/root/.oci  -v $Rootfolder\okitweb:/okit/okitweb -v $Rootfolder\visualiser:/okit/visualiser -v $Rootfolder\log:/okit/log okit:latest
+& "docker" run --rm -it -p 127.0.0.1:443:443/tcp -p 127.0.0.1:80:80/tcp --hostname okit --name okit -v $ENV:UserProfile\.oci:/root/.oci  -v $Rootfolder\okitweb:/okit/okitweb -v $Rootfolder\visualiser:/okit/visualiser -v $Rootfolder\log:/okit/log okit:latest

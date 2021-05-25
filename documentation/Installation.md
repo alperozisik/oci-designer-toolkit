@@ -119,7 +119,7 @@ docker build --tag okit --force-rm --build-arg source=git https://github.com/ora
 ### Run Container
 
 ```bash
-docker run -d --rm -p 80:80 --volume <USER HOME DIR>/okit/user/templates:/okit/templates --volume <USER HOME DIR>/.oci:/root/.oci --volume <USER HOME DIR>/.ssh:/root/.ssh --name okit okit
+docker run -d --rm -p 127.0.0.1:80:80 --volume <USER HOME DIR>/okit/user/templates:/okit/templates --volume <USER HOME DIR>/.oci:/root/.oci --volume <USER HOME DIR>/.ssh:/root/.ssh --name okit okit
 ```
 
 Once started the Designer BUI can be accessed on [http://localhost/okit/designer](http://localhost/okit/designer)
@@ -230,7 +230,7 @@ docker build --tag okit --file ./containers/docker/Dockerfile --force-rm .
 ##### Start Docker Container
 ```bash
 cd oci-designer-toolkit
-docker run -d --rm -p 443:443 -p 80:80 \
+docker run -d --rm -p 127.0.0.1:443:443 -p 127.0.0.1:80:80 \
            --name okit \
            --hostname okit \
            --volume ~/okit/user/templates:/okit/templates \
